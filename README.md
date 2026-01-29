@@ -14,9 +14,9 @@ LINE 機器人，由 Clawdbot + GitHub Copilot 驅動
 - GitHub Copilot access | GitHub Copilot 存取權限
 
 ### LINE Bot Info | LINE Bot 資訊
-- **Bot ID**: @776pxdbk
-- **Display Name | 顯示名稱**: moltbot
-- **Channel ID | 頻道 ID**: 2009006404
+- **Bot ID**: `@your_bot_id`
+- **Display Name | 顯示名稱**: `your_bot_name`
+- **Channel ID | 頻道 ID**: `your_channel_id`
 
 ---
 
