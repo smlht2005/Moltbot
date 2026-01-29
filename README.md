@@ -20,7 +20,39 @@ LINE 機器人，由 Clawdbot + GitHub Copilot 驅動
 
 ---
 
-## 🚀 Setup Process | 設定流程
+## � LINE Channel Setup | LINE 頻道設定
+
+### Step 1: Create LINE Developers Account | 步驟 1：建立 LINE 開發者帳號
+1. Go to | 前往 https://developers.line.biz/
+2. Log in with your LINE account | 使用 LINE 帳號登入
+3. Create a new provider (e.g., "MyBot") | 建立新的 Provider（例如：「MyBot」）
+
+### Step 2: Create Messaging API Channel | 步驟 2：建立 Messaging API 頻道
+1. Click "Create a new channel" | 點擊「Create a new channel」
+2. Select "Messaging API" | 選擇「Messaging API」
+3. Fill in the required information | 填寫必要資訊：
+   - Channel name | 頻道名稱
+   - Channel description | 頻道說明
+   - Category | 類別
+   - Subcategory | 子類別
+4. Agree to terms and create | 同意條款並建立
+
+### Step 3: Get Credentials | 步驟 3：取得憑證
+1. Go to "Basic settings" tab | 前往「Basic settings」分頁
+   - Copy **Channel secret** | 複製 **Channel secret**
+2. Go to "Messaging API" tab | 前往「Messaging API」分頁
+   - Click "Issue" to generate **Channel access token** | 點擊「Issue」產生 **Channel access token**
+   - Copy the token | 複製 token
+
+### Step 4: Configure Messaging Settings | 步驟 4：設定訊息設定
+In "Messaging API" tab | 在「Messaging API」分頁：
+- **Auto-reply messages**: Disabled | **自動回覆訊息**：停用
+- **Greeting messages**: Disabled (optional) | **問候訊息**：停用（可選）
+- **Use webhook**: Enabled | **使用 webhook**：啟用
+
+---
+
+## �🚀 Setup Process | 設定流程
 
 ### 1. Enable LINE Plugin | 啟用 LINE 插件
 ```bash
