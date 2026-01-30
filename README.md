@@ -68,7 +68,15 @@ clawdbot config set channels.line.webhookPath "/line"
 
 ### 3. Start Gateway | 啟動閘道器
 ```bash
-nohup clawdbot gateway > /tmp/gateway.log 2>&1 &
+# 重要：使用 --bind lan 讓 Gateway 接受外部連接
+# Important: Use --bind lan to allow external connections
+nohup clawdbot gateway --bind lan > /tmp/gateway.log 2>&1 &
+```
+
+**可選：啟動自動重啟監控 | Optional: Start auto-restart monitor**
+```bash
+# 背景運行 keep-alive 腳本 | Run keep-alive script in background
+nohup /workspaces/Moltbot/keep-alive.sh > /tmp/keep-alive.log 2>&1 &
 ```
 
 ### 4. Configure Webhook in LINE Developers Console | 在 LINE 開發者控制台設定 Webhook
@@ -90,6 +98,37 @@ When a user first messages the bot, they'll receive a pairing code:
 ```bash
 clawdbot pairing approve line <PAIRING_CODE>
 ```
+
+---
+
+## 🛠️ Troubleshooting | 故障排除
+
+### 1. Gateway 停止運作 / Webhook 驗證失敗
+**症狀**: LINE Webhook 驗證回傳 `404` 或 `502`，Bot 無法收到訊息。
+
+**主要原因 (Root Cause)**:
+- **綁定問題**: `clawdbot gateway` 預設僅監聽 `127.0.0.1` (localhost)，導致外部 LINE 伺服器無法存取。
+- **休眠問題**: GitHub Codespaces 在閒置 30 分鐘後會進入休眠 (Hibernation)，導致所有背景進程 (Gateway) 被終止。
+
+**解決方案**:
+1. **正確綁定**: 啟動時必須加上 `--bind lan` 參數。
+   ```bash
+   clawdbot gateway --bind lan &
+   ```
+2. **自動啟動**: 項目已建立 `.devcontainer/devcontainer.json`，在 Codespace 重啟時會自動執行 Gateway。
+3. **公開 Port**: 每次重啟後，請務必確認 **Port 18789** 的狀態為 **Public**。
+
+### 2. Brave Search API 搜尋失效
+**症狀**: Bot 回報沒有權限訪問搜尋引擎。
+
+**解決方案**:
+確保環境變數 `BRAVE_API_KEY` 已設定。
+```bash
+export BRAVE_API_KEY="your_api_key"
+```
+*(本項目已將 Key 加入 `~/.bashrc` 以利自動載入)*
+
+---
 
 ---
 
@@ -153,6 +192,23 @@ nohup clawdbot gateway > /tmp/gateway.log 2>&1 &
 2. **Webhook URL Changes | Webhook URL 變更**: If Codespace URL changes, update webhook in LINE Developers Console. | 如果 Codespace URL 改變，需在 LINE 開發者控制台更新 webhook。
 
 3. **Current Model | 目前模型**: `github-copilot/gpt-4o`
+
+---
+
+---
+
+## 🌐 Additional Features | 附加功能
+
+### Browser Control & Web Search | 瀏覽器控制與網頁搜尋
+查看 [BROWSER_SETUP.md](BROWSER_SETUP.md) 了解如何設置：
+- 瀏覽器控制功能
+- Brave Search API 網頁搜尋
+- 即時資訊查詢
+
+See [BROWSER_SETUP.md](BROWSER_SETUP.md) for setup instructions on:
+- Browser control capabilities
+- Brave Search API for web searches
+- Real-time information queries
 
 ---
 

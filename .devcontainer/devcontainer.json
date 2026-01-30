@@ -1,0 +1,11 @@
+{
+  "name": "Moltbot",
+  "postStartCommand": "nohup clawdbot gateway --bind lan > /tmp/gateway.log 2>&1 &",
+  "forwardPorts": [18789],
+  "portsAttributes": {
+    "18789": {
+      "label": "Moltbot Gateway",
+      "visibility": "public"
+    }
+  }
+}
