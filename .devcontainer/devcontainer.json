@@ -1,6 +1,6 @@
 {
   "name": "Moltbot",
-  "postStartCommand": "nohup clawdbot gateway --bind lan > /tmp/gateway.log 2>&1 &",
+  "postStartCommand": "nohup clawdbot gateway --bind lan > /tmp/gateway.log 2>&1 & sleep 3 && gh codespace ports visibility 18789:public -c $CODESPACE_NAME 2>/dev/null || true",
   "forwardPorts": [18789],
   "portsAttributes": {
     "18789": {
